@@ -1,36 +1,39 @@
 package com.example.covid_19.ui
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.covid_19.API.CovidAPI
 import com.example.covid_19.R
-import com.example.covid_19.RecyclerListFragment
-import com.example.covid_19.data.Country
-import com.example.covid_19.data.api.ApiService
-import com.google.android.material.textfield.TextInputEditText
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.example.covid_19.adapter.Adapter
+import com.google.gson.GsonBuilder
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.internal.schedulers.IoScheduler
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : AppCompatActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        var recyclerView: RecyclerView? = null
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupFragment()
-    }
+        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val url = "https://api.covid19api.com/"
+        val retrofit = Retrofit.Builder().addConverterFactory(
+            GsonConverterFactory.create(
+                GsonBuilder().create()
+            )
+        ).addCallAdapterFactory(RxJava3CallAdapterFactory.create()).baseUrl(url).build()
 
-    private fun setupFragment() {
-        val fragment = RecyclerListFragment.newInstance()
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val fragmentTransaction : FragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(android.R.id.content, fragment)
-        fragmentTransaction.commit()
+        val postCountryAPI = retrofit.create(CovidAPI::class.java)
+        val response = postCountryAPI.getAllData()
+        response.observeOn(AndroidSchedulers.mainThread()).subscribeOn(IoScheduler()).subscribe() {
+            recyclerView!!.adapter = Adapter(it, this)
         }
+
+    }
 }
