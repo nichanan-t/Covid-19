@@ -34,8 +34,9 @@
                     android:layout_marginTop="5dp"
                     android:background="#D2E4D2"
                     android:fontFamily="@font/capriola"
+                    android:gravity="center_horizontal"
                     android:text="COVID-19 Reported Cases"
-                    android:textSize="22sp"
+                    android:textSize="24sp"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -49,9 +50,10 @@
                         android:id="@+id/txt02"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="New Confirmed :" />
+                        android:text="New Confirmed :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtNewConfirmed"
@@ -61,6 +63,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#F4960A"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -74,9 +77,10 @@
                         android:id="@+id/txt03"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="Total Confirmed :" />
+                        android:text="Total Confirmed :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtTotalConfirmed"
@@ -86,6 +90,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#DA8A13"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -99,9 +104,10 @@
                         android:id="@+id/textView3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="New Deaths :" />
+                        android:text="New Deaths :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtNewDeaths"
@@ -111,6 +117,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#FF0000"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -124,9 +131,10 @@
                         android:id="@+id/textView5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="Total Deaths :" />
+                        android:text="Total Deaths :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtTotalDeaths"
@@ -136,6 +144,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#C40808"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -149,9 +158,10 @@
                         android:id="@+id/textView7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="New Recovered :" />
+                        android:text="New Recovered :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtNewRecovered"
@@ -161,6 +171,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#009688"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 
@@ -173,9 +184,10 @@
                         android:id="@+id/textView9"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="4"
                         android:fontFamily="@font/capriola"
-                        android:text="Total Recovered :" />
+                        android:text="Total Recovered :"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txtTotalRecovered"
@@ -185,6 +197,7 @@
                         android:fontFamily="@font/capriola"
                         android:text="TextView"
                         android:textColor="#047066"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
 

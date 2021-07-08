@@ -20,7 +20,16 @@ class Adapter (private val postList: List<Data>, private val context: Context) :
         holder.BindContentValue!!.text = postList[position].countryCode
         holder.BindCardView!!.setOnClickListener {
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra("Code", postList[position].countryCode)
+            intent.putExtra("code", postList[position].countryCode)
+            intent.putExtra("name", postList[position].country)
+            intent.putExtra("newConfirmed", postList[position].newConfirmed.toString())
+            intent.putExtra("totalConfirmed", postList[position].totalConfirmed.toString())
+            intent.putExtra("newDeaths", postList[position].newDeaths.toString())
+            intent.putExtra("totalDeaths", postList[position].totalDeaths.toString())
+            intent.putExtra("newRecovered", postList[position].newRecovered.toString())
+            intent.putExtra("totalRecovered", postList[position].totalRecovered.toString())
+            intent.putExtra("date", postList[position].date)
+            intent.putExtra("time", postList[position].date)
             context.startActivity(intent)
         }
         Picasso.get().load(postList[position].date).error(R.drawable.ic_baseline_arrow_forward_ios_24)
