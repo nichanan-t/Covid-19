@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         val postCountryAPI = retrofit.create(CovidAPI::class.java)
         val response = postCountryAPI.getAllData()
         response.observeOn(AndroidSchedulers.mainThread()).subscribeOn(IoScheduler()).subscribe() {
-            recyclerView!!.adapter = Adapter(it, this)
+            recyclerView.adapter = Adapter(it.Countries, this)
         }
 
     }
