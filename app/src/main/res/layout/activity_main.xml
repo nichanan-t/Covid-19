@@ -56,10 +56,12 @@
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:queryHint="Search country..."
+            android:iconifiedByDefault="false"
             android:layout_margin="16dp"
             android:background="@drawable/search_layout"
             android:backgroundTint="#FFFFFF"
-            app:queryHint="Search country..."/>
+            />
 
 
     </LinearLayout>
