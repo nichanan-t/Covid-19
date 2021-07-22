@@ -111,7 +111,8 @@ class MainActivity : AppCompatActivity() {
 
                     for (row in countryList) {
                         if (row.country.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT))
+//                                .contains(charSearch.lowercase(Locale.ROOT))
+                                    .startsWith(charSearch.lowercase(Locale.ROOT))
                         )
                         {
                             resultList.add(row)
