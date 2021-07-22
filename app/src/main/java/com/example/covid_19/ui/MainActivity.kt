@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = com.example.covid_19.adapter.Adapter(it.Countries, this)
         }
 
+
     }
 }
 
