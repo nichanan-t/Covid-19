@@ -52,16 +52,16 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <SearchView
-            android:id="@+id/search_bar"
+        <EditText
+            android:id="@+id/search_country"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:queryHint="Search country..."
-            android:iconifiedByDefault="false"
             android:layout_margin="16dp"
             android:background="@drawable/search_layout"
             android:backgroundTint="#FFFFFF"
-            />
+            android:drawableLeft="@drawable/ic_baseline_search_24"
+            android:iconifiedByDefault="false"
+            app:queryHint="Search country..." />
 
 
     </LinearLayout>

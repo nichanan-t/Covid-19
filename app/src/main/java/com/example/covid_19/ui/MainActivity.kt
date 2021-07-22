@@ -1,12 +1,16 @@
 package com.example.covid_19.ui
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils.isEmpty
+import android.text.TextWatcher
 import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.Adapter
+import android.widget.EditText
+import android.widget.Filter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Transformations.distinctUntilChanged
@@ -16,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.API.CovidAPI
 import com.example.covid_19.R
+import com.example.covid_19.databinding.ActivityMainBinding
 import com.example.covid_19.models.Country
 import com.example.covid_19.models.Data
 import com.google.gson.GsonBuilder
@@ -31,43 +36,131 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
+
+//    var adapter: com.example.covid_19.adapter.Adapter
+    var recyclerView: RecyclerView? = null
+
 //    private var recyclerView: RecyclerView? = null
+    private var countryList = arrayListOf<Data>()
+    private var filteredList = arrayListOf<Data>()
+
+    private lateinit var binding: ActivityMainBinding
+
+    val url = "https://api.covid19api.com/"
+    val retrofit = Retrofit.Builder().addConverterFactory(
+        GsonConverterFactory.create(
+            GsonBuilder().create()
+        )
+    ).addCallAdapterFactory(RxJava3CallAdapterFactory.create()).baseUrl(url).build()
+    val postCountryAPI = retrofit.create(CovidAPI::class.java)
+    val response = postCountryAPI.getAllData()
+
 //    private var layoutManager: RecyclerView.LayoutManager? = null
 //    private val data: List<Data> = ArrayList<Data>()
 //    private val adapter: Adapter? = null
 //    private val TAG = MainActivity::class.java.simpleName
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var searchBar = findViewById<SearchView>(R.id.search_bar)
-        var recyclerView: RecyclerView? = null
+//        var searchBar = findViewById<EditText>(R.id.search_bar)
+//        var recyclerView: RecyclerView? = null
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-//        recyclerView = findViewById(R.id.recyclerView)
+//        searchBar = findViewById(R.id.search_country)
 //        layoutManager = LinearLayoutManager(this@MainActivity)
 //        recyclerView!!.setLayoutManager(layoutManager)
 //        recyclerView!!.setItemAnimator(DefaultItemAnimator())
 //        recyclerView!!.setNestedScrollingEnabled(false)
 
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val url = "https://api.covid19api.com/"
-        val retrofit = Retrofit.Builder().addConverterFactory(
-            GsonConverterFactory.create(
-                GsonBuilder().create()
-            )
-        ).addCallAdapterFactory(RxJava3CallAdapterFactory.create()).baseUrl(url).build()
+//        recyclerView = findViewById(R.id.recyclerView)
+//        recyclerView!!.layoutManager = LinearLayoutManager(this)
 
-        val postCountryAPI = retrofit.create(CovidAPI::class.java)
-        val response = postCountryAPI.getAllData()
-        response.observeOn(AndroidSchedulers.mainThread()).subscribeOn(IoScheduler()).subscribe() {
-            recyclerView.adapter = com.example.covid_19.adapter.Adapter(it.Countries, this)
+        recyclerView = findViewById(R.id.recyclerView) as RecyclerView
+        recyclerView!!.layoutManager = LinearLayoutManager(this)
+//        recyclerView!!.layoutManager = LinearLayoutManager(recyclerView!!.context)
+
+        val covidAdapter = com.example.covid_19.adapter.Adapter(countryList, this)
+        recyclerView!!.adapter = covidAdapter
+
+        recyclerView!!.setHasFixedSize(true)
+
+        binding.searchCountry.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+                val charSearch = s.toString()
+
+                if (charSearch.isEmpty()) {
+                    filteredList = countryList
+                    recyclerView!!.adapter =
+                    com.example.covid_19.adapter.Adapter(filteredList, this@MainActivity)
+                } else {
+                    val resultList = ArrayList<Data>()
+
+                    for (row in countryList) {
+                        if (row.country.lowercase(Locale.ROOT)
+                                .contains(charSearch.lowercase(Locale.ROOT))
+                        )
+                        {
+                            resultList.add(row)
+                            filteredList = resultList
+                        }
+
+                        recyclerView!!.adapter =
+                        com.example.covid_19.adapter.Adapter(resultList, this@MainActivity)
+                        }
+                        covidAdapter.notifyDataSetChanged()
+                    }
+                }
+            })
+
+
+
+//                    filteredList = resultList
+//                    filteredList = results?.values as ArrayList<Data>
+
+
+
+
+
+//                adapter.getFilter()
+//                val textSearch = binding.searchCountry.text.toString()
+//
+//                countryList.forEach {
+//                    if (it.country.toLowerCase().startsWith(textSearch)) {
+//                        filteredList.add(it)
+//                        recyclerView!!.adapter =
+//                            com.example.covid_19.adapter.Adapter(filteredList, this@MainActivity)
+//                    } else {
+//                        recyclerView!!.adapter =
+//                            com.example.covid_19.adapter.Adapter(arrayListOf(it), this@MainActivity)
+//                    }
+//                }
+//            }
+//        })
+
+        getAllData()
+    }
+
+    fun getAllData() {
+        response.observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(IoScheduler())
+            .subscribe() {
+                countryList = it.Countries
+                recyclerView!!.adapter = com.example.covid_19.adapter.Adapter(countryList, this)
         }
-
-
     }
 }
 

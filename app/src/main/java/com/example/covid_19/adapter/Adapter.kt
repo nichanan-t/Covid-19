@@ -5,6 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
+import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.R
@@ -17,7 +18,12 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class Adapter (private var postList: List<Data>, private val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class Adapter (private var postList: ArrayList<Data>, private val context: Context) :
+    RecyclerView.Adapter<ViewHolder>(), Filterable {
+
+//    private var postList = arrayListOf<Data>()
+    var countryFilterList = arrayListOf<Data>()
+
     var txtNewConfirmed: TextView? = null
     var txtTotalConfirmed: TextView? = null
     var txtNewDeaths: TextView? = null
@@ -32,7 +38,6 @@ class Adapter (private var postList: List<Data>, private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
 
         holder.BindTextValue!!.text = postList[position].country
         holder.BindContentValue!!.text = postList[position].countryCode
@@ -94,39 +99,71 @@ class Adapter (private var postList: List<Data>, private val context: Context) :
         return postList.size
     }
 
-    fun getFilter(): Filter {
+    override fun getFilter(): Filter {
         return object : Filter() {
-            override fun performFiltering(charSequence: CharSequence): FilterResults {
-                val charString = charSequence.toString()
-                val mArrayList = postList
-                if (charString.isEmpty()) {
-                    postList = mArrayList
+            override fun performFiltering(constraint: CharSequence?): FilterResults {
+                val charSearch = constraint.toString()
+                if (charSearch.isEmpty()) {
+                    countryFilterList = postList
                 } else {
-                    val filteredList: ArrayList<Data> = ArrayList()
-                    val mArrayList: ArrayList<Data>
-                    for (country in postList) {
-                        if (country.toString().lowercase(Locale.getDefault())
-                                .contains(charString) || country.toString()
-                                .lowercase(Locale.getDefault())
-//                                .contains(charString) || countryCode.toS.toLowerCase()
-                                .contains(charString)
+                    val resultList = arrayListOf<Data>()
+                    for (row in postList) {
+                        if (row.country.lowercase(Locale.ROOT)
+                                .contains(charSearch.lowercase(Locale.ROOT))
                         ) {
-                            filteredList.add(country)
+                            resultList.add(row)
                         }
                     }
-                    postList = filteredList
+                    countryFilterList = resultList
                 }
                 val filterResults = FilterResults()
-                filterResults.values = postList
+                filterResults.values = countryFilterList
                 return filterResults
             }
 
-            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
-                postList = filterResults.values as ArrayList<Data>
+            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+                countryFilterList = results?.values as ArrayList<Data>
                 notifyDataSetChanged()
             }
         }
     }
+}
+
+
+
+//    fun getFilter(): Filter {
+//        return object : Filter() {
+//            override fun performFiltering(charSequence: CharSequence): FilterResults {
+//                val charString = charSequence.toString()
+//                val mArrayList = postList
+//                if (charString.isEmpty()) {
+//                    postList = mArrayList
+//                } else {
+//                    val filteredList: ArrayList<Data> = ArrayList()
+//                    val mArrayList: ArrayList<Data>
+//                    for (country in postList) {
+//                        if (country.toString().lowercase(Locale.getDefault())
+//                                .contains(charString) || country.toString()
+//                                .lowercase(Locale.getDefault())
+////                                .contains(charString) || countryCode.toS.toLowerCase()
+//                                .contains(charString)
+//                        ) {
+//                            filteredList.add(country)
+//                        }
+//                    }
+//                    postList = filteredList
+//                }
+//                val filterResults = FilterResults()
+//                filterResults.values = postList
+//                return filterResults
+//            }
+//
+//            override fun publishResults(charSequence: CharSequence, filterResults: FilterResults) {
+//                postList = filterResults.values as ArrayList<Data>
+//                notifyDataSetChanged()
+//            }
+//        }
+//    }
 
 
 
@@ -230,4 +267,3 @@ class Adapter (private var postList: List<Data>, private val context: Context) :
 //    }
 
 
-}

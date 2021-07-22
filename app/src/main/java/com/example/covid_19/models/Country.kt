@@ -2,7 +2,7 @@ package com.example.covid_19.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Country (val Countries: List<Data>)
+data class Country (val Countries: ArrayList<Data>)
 data class Data (
     @SerializedName("Country") val country: String,
     @SerializedName("CountryCode") val countryCode:String,
