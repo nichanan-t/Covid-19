@@ -7,12 +7,14 @@ import android.text.TextWatcher
 import android.text.method.TextKeyListener.clear
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.Adapter
 import android.widget.EditText
 import android.widget.Filter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Transformations.distinctUntilChanged
 import androidx.lifecycle.Transformations.map
 import androidx.recyclerview.widget.DefaultItemAnimator
@@ -34,6 +36,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
@@ -63,6 +66,11 @@ class MainActivity : AppCompatActivity() {
 //    private val adapter: Adapter? = null
 //    private val TAG = MainActivity::class.java.simpleName
 
+    var tb: Toolbar? = null
+//    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
+    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd z")
+    val currentDateAndTime: String = simpleDateFormat.format(Date())
+
     override fun onCreate(savedInstanceState: Bundle?) {
 //        var searchBar = findViewById<EditText>(R.id.search_bar)
 //        var recyclerView: RecyclerView? = null
@@ -70,6 +78,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        tb = findViewById<Toolbar>(R.id.toolbar)
+        tb!!.setSubtitle(currentDateAndTime)
+        setSupportActionBar(tb)
 
 //        searchBar = findViewById(R.id.search_country)
 //        layoutManager = LinearLayoutManager(this@MainActivity)
@@ -153,6 +165,20 @@ class MainActivity : AppCompatActivity() {
 //        })
 
         getAllData()
+    }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_items, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId) {
+//            R.id.
+//        }
+
+        return true
     }
 
     fun getAllData() {

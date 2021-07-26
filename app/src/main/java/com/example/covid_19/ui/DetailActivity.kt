@@ -3,8 +3,10 @@ package com.example.covid_19.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.API.CaseAPI
@@ -27,12 +29,21 @@ class DetailActivity : AppCompatActivity() {
     var showDate: TextView? = null
     var showTime: TextView? = null
     var btnBack: ImageView? = null
+    var tb: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        showCountryName = findViewById(R.id.txtCountryName)
+        tb = findViewById<Toolbar>(R.id.toolbar)
+        tb!!.setTitle(intent.getStringExtra("name"))
+        setSupportActionBar(tb)
+
+        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_ios_24)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+
+//        showCountryName = findViewById(R.id.txtCountryName)
         showNewConfirmed = findViewById(R.id.txtNewConfirmed)
         showTotalConfirmed = findViewById(R.id.txtTotalConfirmed)
         showNewDeaths = findViewById(R.id.txtNewDeaths)
@@ -41,10 +52,20 @@ class DetailActivity : AppCompatActivity() {
         showTotalRecovered = findViewById(R.id.txtTotalRecovered)
         showDate = findViewById(R.id.date)
         showTime = findViewById(R.id.time)
-        btnBack = findViewById(R.id.back)
+//        btnBack = findViewById(R.id.back)
 
         val intent = intent
-        showCountryName!!.text = "" + (intent.getStringExtra("name"))
+
+        /*  set ActionBar*/
+//        val actionBar = supportActionBar
+
+        /* set ActionBar title*/
+//        actionBar!!.title ="" + (intent.getStringExtra("name"))
+
+        /*  set back button*/
+//        actionBar!!.setDisplayHomeAsUpEnabled(true)
+
+//        showCountryName!!.text = "" + (intent.getStringExtra("name"))
         showNewConfirmed!!.text = "" + (intent.getStringExtra("newConfirmed"))
         showTotalConfirmed!!.text = "" + (intent.getStringExtra("totalConfirmed"))
         showNewDeaths!!.text = "" + (intent.getStringExtra("newDeaths"))
@@ -54,10 +75,10 @@ class DetailActivity : AppCompatActivity() {
         showDate!!.text = "" + (intent.getStringExtra("date")?.substring(0,10))
         showTime!!.text = "" + (intent.getStringExtra("date")?.substring(11,23))
 
-        btnBack!!.setOnClickListener {
-            val back = Intent(this, MainActivity::class.java)
-            this.startActivity(back)
-        }
+//        btnBack!!.setOnClickListener {
+//            val back = Intent(this, MainActivity::class.java)
+//            this.startActivity(back)
+//        }
 
         val url = "https://api.covid19api.com/"
         val retrofit = Retrofit.Builder().addConverterFactory(
@@ -70,5 +91,10 @@ class DetailActivity : AppCompatActivity() {
         val responseCase = postCaseAPI.getCaseData()
         responseCase.observeOn(AndroidSchedulers.mainThread()).subscribeOn(IoScheduler()).subscribe{
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
