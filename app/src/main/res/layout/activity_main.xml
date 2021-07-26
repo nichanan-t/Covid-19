@@ -8,35 +8,35 @@
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
     android:layout_marginBottom="5dp"
-    android:background="#A4DAE0"
+    android:background="#F6DBD9"
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:background="#F2E9E9"-->
-<!--        android:orientation="vertical">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:background="#F2E9E9"-->
+    <!--        android:orientation="vertical">-->
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:background="#F2E9E9"-->
-<!--            android:fontFamily="@font/capriola"-->
-<!--            android:gravity="center_horizontal"-->
-<!--            android:padding="3dp"-->
-<!--            android:text="COVID-19 Daily Reported Cases"-->
-<!--            android:textColor="#10C4C3"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="bold" />-->
+    <!--        <TextView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:background="#F2E9E9"-->
+    <!--            android:fontFamily="@font/capriola"-->
+    <!--            android:gravity="center_horizontal"-->
+    <!--            android:padding="3dp"-->
+    <!--            android:text="COVID-19 Daily Reported Cases"-->
+    <!--            android:textColor="#10C4C3"-->
+    <!--            android:textSize="20sp"-->
+    <!--            android:textStyle="bold" />-->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#72B0B8"
-        app:title="Covid-19 Report cases"
+        android:background="#EE857D"
+        app:title="COVID-19 Report cases"
         app:titleMarginStart="40dp"
         app:subtitle="July 26, 2021"
         app:navigationIcon="@drawable/ic_menu"
@@ -58,7 +58,7 @@
         android:format12Hour="hh:mm:ss a"
         android:gravity="center_horizontal"
         android:padding="5dp"
-        android:textColor="#648E8D"
+        android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/search_country"
@@ -66,13 +66,13 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:orientation="horizontal">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:orientation="horizontal">-->
 
     <EditText
         android:id="@+id/search_country"
@@ -95,7 +95,7 @@
         app:queryHint="Search country..." />
 
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
 
     <androidx.recyclerview.widget.RecyclerView
