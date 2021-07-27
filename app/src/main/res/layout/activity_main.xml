@@ -12,31 +12,12 @@
     android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:background="#F2E9E9"-->
-    <!--        android:orientation="vertical">-->
-
-    <!--        <TextView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:background="#F2E9E9"-->
-    <!--            android:fontFamily="@font/capriola"-->
-    <!--            android:gravity="center_horizontal"-->
-    <!--            android:padding="3dp"-->
-    <!--            android:text="COVID-19 Daily Reported Cases"-->
-    <!--            android:textColor="#10C4C3"-->
-    <!--            android:textSize="20sp"-->
-    <!--            android:textStyle="bold" />-->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#EE857D"
-        app:title="COVID-19 Report cases"
+        app:title="COVID-19 Daily Report"
         app:titleMarginStart="40dp"
         app:subtitle="July 26, 2021"
         app:navigationIcon="@drawable/ic_menu"
@@ -66,14 +47,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <!--    </LinearLayout>-->
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginTop="10dp"-->
-    <!--        android:orientation="horizontal">-->
-
     <EditText
         android:id="@+id/search_country"
         android:layout_width="0dp"
@@ -93,10 +66,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clock"
         app:queryHint="Search country..." />
-
-
-    <!--    </LinearLayout>-->
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

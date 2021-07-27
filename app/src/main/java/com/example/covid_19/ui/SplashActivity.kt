@@ -10,7 +10,7 @@ import com.example.covid_19.R
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashScreenTimeOut: Long = 3500
+    private val splashScreenTimeOut: Long = 1500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +22,11 @@ class SplashActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_splash_screen)
 
-        // FIXME: Use null safety (?) instead of nonnull (!!)
-        Handler(Looper.myLooper()!!).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-
-        }, splashScreenTimeOut)
+        Looper.myLooper()?.also { looper ->
+            Handler(looper).postDelayed({
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }, splashScreenTimeOut)
+        }
     }
 }
