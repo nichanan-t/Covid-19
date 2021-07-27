@@ -43,15 +43,18 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
+    // FIXME: Remove unused code
 //    var adapter: com.example.covid_19.adapter.Adapter
     var recyclerView: RecyclerView? = null
 
+    // FIXME: Remove unused code
 //    private var recyclerView: RecyclerView? = null
     private var countryList = arrayListOf<Data>()
     private var filteredList = arrayListOf<Data>()
 
     private lateinit var binding: ActivityMainBinding
 
+    // FIXME: Make variable to private because it use only in this class
     val url = "https://api.covid19api.com/"
     val retrofit = Retrofit.Builder().addConverterFactory(
         GsonConverterFactory.create(
@@ -61,17 +64,21 @@ class MainActivity : AppCompatActivity() {
     val postCountryAPI = retrofit.create(CovidAPI::class.java)
     val response = postCountryAPI.getAllData()
 
+    var tb: Toolbar? = null
+
+    // FIXME: Remove unused code
 //    private var layoutManager: RecyclerView.LayoutManager? = null
 //    private val data: List<Data> = ArrayList<Data>()
 //    private val adapter: Adapter? = null
 //    private val TAG = MainActivity::class.java.simpleName
 
-    var tb: Toolbar? = null
+
 //    val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z")
     val simpleDateFormat = SimpleDateFormat("yyyy.MM.dd z")
     val currentDateAndTime: String = simpleDateFormat.format(Date())
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // FIXME: Remove unused code
 //        var searchBar = findViewById<EditText>(R.id.search_bar)
 //        var recyclerView: RecyclerView? = null
 
@@ -80,9 +87,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         tb = findViewById<Toolbar>(R.id.toolbar)
+        // FIXME: Use null safety (?) instead of nonnull (!!)
         tb!!.setSubtitle(currentDateAndTime)
         setSupportActionBar(tb)
 
+        // FIXME: Remove unused code
 //        searchBar = findViewById(R.id.search_country)
 //        layoutManager = LinearLayoutManager(this@MainActivity)
 //        recyclerView!!.setLayoutManager(layoutManager)
@@ -92,13 +101,17 @@ class MainActivity : AppCompatActivity() {
 //        recyclerView = findViewById(R.id.recyclerView)
 //        recyclerView!!.layoutManager = LinearLayoutManager(this)
 
+        // FIXME: Remove as RecyclerView because it is not necessary
         recyclerView = findViewById(R.id.recyclerView) as RecyclerView
         recyclerView!!.layoutManager = LinearLayoutManager(this)
+        // FIXME: Remove unused code
 //        recyclerView!!.layoutManager = LinearLayoutManager(recyclerView!!.context)
 
         val covidAdapter = com.example.covid_19.adapter.Adapter(countryList, this)
+        // FIXME: Use null safety (?) instead of nonnull (!!)
         recyclerView!!.adapter = covidAdapter
 
+        // FIXME: Use null safety (?) instead of nonnull (!!)
         recyclerView!!.setHasFixedSize(true)
 
         binding.searchCountry.addTextChangedListener(object : TextWatcher {
@@ -116,6 +129,7 @@ class MainActivity : AppCompatActivity() {
 
                 if (charSearch.isEmpty()) {
                     filteredList = countryList
+                    // FIXME: Use null safety (?) instead of nonnull (!!)
                     recyclerView!!.adapter =
                     com.example.covid_19.adapter.Adapter(filteredList, this@MainActivity)
                 } else {
@@ -123,6 +137,7 @@ class MainActivity : AppCompatActivity() {
 
                     for (row in countryList) {
                         if (row.country.lowercase(Locale.ROOT)
+                                // FIXME: Remove unused code
 //                                .contains(charSearch.lowercase(Locale.ROOT))
                                     .startsWith(charSearch.lowercase(Locale.ROOT))
                         )
@@ -131,6 +146,7 @@ class MainActivity : AppCompatActivity() {
                             filteredList = resultList
                         }
 
+                        // FIXME: Use null safety (?) instead of nonnull (!!)
                         recyclerView!!.adapter =
                         com.example.covid_19.adapter.Adapter(resultList, this@MainActivity)
                         }
@@ -140,13 +156,10 @@ class MainActivity : AppCompatActivity() {
             })
 
 
+                // FIXME: Remove unused code
 
 //                    filteredList = resultList
 //                    filteredList = results?.values as ArrayList<Data>
-
-
-
-
 
 //                adapter.getFilter()
 //                val textSearch = binding.searchCountry.text.toString()
@@ -173,6 +186,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // FIXME: This method is necessary? if not remove it
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        when(item.itemId) {
 //            R.id.
@@ -181,18 +195,20 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // FIXME: Make this function to private
     fun getAllData() {
         response.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(IoScheduler())
             .subscribe() {
                 countryList = it.Countries
+                // FIXME: Use null safety (?) instead of nonnull (!!)
                 recyclerView!!.adapter = com.example.covid_19.adapter.Adapter(countryList, this)
         }
     }
 }
 
 
-
+// FIXME: Remove unused code
 //        LoadJSON()
 //    }
 //

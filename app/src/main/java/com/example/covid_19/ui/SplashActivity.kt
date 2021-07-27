@@ -22,6 +22,7 @@ class SplashActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_splash_screen)
 
+        // FIXME: Use null safety (?) instead of nonnull (!!)
         Handler(Looper.myLooper()!!).postDelayed({
             startActivity(Intent(this, MainActivity::class.java))
             finish()
