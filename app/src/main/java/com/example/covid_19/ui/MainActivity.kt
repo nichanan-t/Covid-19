@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid_19.API.CovidAPI
+import com.example.covid_19.api.CovidAPI
 import com.example.covid_19.R
 import com.example.covid_19.databinding.ActivityMainBinding
 import com.example.covid_19.models.Data
