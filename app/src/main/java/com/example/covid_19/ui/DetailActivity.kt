@@ -16,7 +16,7 @@ class DetailActivity : AppCompatActivity() {
     private var showTotalRecovered: TextView? = null
     private var showDate: TextView? = null
     private var showTime: TextView? = null
-    var tb: Toolbar? = null
+    private var tb: Toolbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +24,7 @@ class DetailActivity : AppCompatActivity() {
 
         val intent = intent
 
-        tb = findViewById<Toolbar>(R.id.toolbar)
+        tb = findViewById(R.id.toolbar)
         tb?.title = intent.getStringExtra("name")
         setSupportActionBar(tb)
 

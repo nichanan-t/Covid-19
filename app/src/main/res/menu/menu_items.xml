@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_more_vert"
         android:title="">
         <menu>
@@ -10,25 +10,25 @@
             <item
                 android:id="@+id/covid"
                 android:icon="@drawable/ic_coronavirus"
-                android:title= "Covid-19 Daily Report"
+                android:title= "@string/title_tb"
                 app:showAsAction="never"/>
 
             <item
                 android:id="@+id/profile"
                 android:icon="@drawable/ic_person_pin"
-                android:title= "Profile"
+                android:title= "@string/profile"
                 app:showAsAction="never"/>
 
             <item
                 android:id="@+id/share"
                 android:icon="@drawable/ic_share"
-                android:title= "Share"
+                android:title= "@string/share"
                 app:showAsAction="never"/>
 
             <item
                 android:id="@+id/settings"
                 android:icon="@drawable/ic_settings"
-                android:title= "Settings"
+                android:title= "@string/settings"
                 app:showAsAction="never"/>
 
         </menu>

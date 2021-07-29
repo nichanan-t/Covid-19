@@ -24,8 +24,8 @@ import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
-    var recyclerView: RecyclerView? = null
-    var tb: Toolbar? = null
+    private var recyclerView: RecyclerView? = null
+    private var tb: Toolbar? = null
     private var countryList = arrayListOf<Data>()
     private var filteredList = arrayListOf<Data>()
     private lateinit var binding: ActivityMainBinding
@@ -44,11 +44,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        tb = findViewById<Toolbar>(R.id.toolbar)
-        tb?.subtitle = currentDate.toString()
+        tb = findViewById(R.id.toolbar)
+        tb?.subtitle = currentDate
         setSupportActionBar(tb)
 
-        recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(this)
 
         val covidAdapter = com.example.covid_19.adapter.Adapter(countryList, this)
@@ -101,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAllData() {
         response.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(IoScheduler())
-            .subscribe() {
+            .subscribe {
                 countryList = it.Countries
                 recyclerView?.adapter = com.example.covid_19.adapter.Adapter(countryList, this)
         }
