@@ -4,19 +4,15 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.covid_19.R
 import com.example.covid_19.models.Data
 import com.example.covid_19.ui.DetailActivity
 import java.text.NumberFormat
-import java.util.*
 
 class Adapter (private var postList: ArrayList<Data>, private val context: Context) :
-    RecyclerView.Adapter<ViewHolder>(), Filterable {
+    RecyclerView.Adapter<ViewHolder>() {
 
-    private var countryFilterList = arrayListOf<Data>()
     private var numFormat: NumberFormat = NumberFormat.getInstance()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -67,34 +63,5 @@ class Adapter (private var postList: ArrayList<Data>, private val context: Conte
 
     override fun getItemCount(): Int {
         return postList.size
-    }
-
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                countryFilterList = if (charSearch.isEmpty()) {
-                    postList
-                } else {
-                    val resultList = arrayListOf<Data>()
-                    for (row in postList) {
-                        if (row.country.lowercase(Locale.ROOT)
-                                .contains(charSearch.lowercase(Locale.ROOT))
-                        ) {
-                            resultList.add(row)
-                        }
-                    }
-                    resultList
-                }
-                val filterResults = FilterResults()
-                filterResults.values = countryFilterList
-                return filterResults
-            }
-
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                countryFilterList = results?.values as ArrayList<Data>
-                notifyDataSetChanged()
-            }
-        }
     }
 }

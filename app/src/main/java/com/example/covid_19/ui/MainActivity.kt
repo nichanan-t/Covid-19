@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.covid_19.api.CovidAPI
 import com.example.covid_19.R
+import com.example.covid_19.api.CovidAPI
 import com.example.covid_19.databinding.ActivityMainBinding
 import com.example.covid_19.models.Data
 import com.google.gson.GsonBuilder
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
                         recyclerView?.adapter =
                         com.example.covid_19.adapter.Adapter(resultList, this@MainActivity)
                         }
-                        covidAdapter.notifyDataSetChanged()
+                    covidAdapter.notifyItemChanged(0, filteredList)
                     }
                 }
             })
